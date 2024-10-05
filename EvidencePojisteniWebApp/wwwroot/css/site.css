@@ -8,6 +8,11 @@
     src: url('../fonts/Montserrat-ExtraBold.ttf');
 }
 
+@font-face {
+    font-family: 'MonseratBold';
+    src: url(../fonts/Montserrat-Bold.ttf);
+}
+
 body {
     font-family: MonseratRegular;
 }
