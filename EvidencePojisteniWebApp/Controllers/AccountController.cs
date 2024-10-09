@@ -54,5 +54,37 @@ namespace EvidencePojisteniWebApp.Controllers
 			// Pokud byly neplatné přihlašovací údaje, vrátíme uživatele k přihlašovacímu formuláři
 			return View(model);
 		}
+
+		private IActionResult Register(string? returnUrl = null)
+		{
+			ViewData["ReturnUrl"] = returnUrl;
+			return View();
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+
+		public async Task<IActionResult> Register(RegisterViewModel model, string? returnUrl = null)
+		{
+			ViewData["ReturnUrl"] = returnUrl;
+
+			if (ModelState.IsValid)
+			{
+				IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
+				IdentityResult result = await userManager.CreateAsync(user, model.Password);
+
+				if (result.Succeeded)
+				{
+					await signInManager.SignInAsync(user, isPersistent: false);
+					return RedirectToLocal(returnUrl);
+				}
+
+				foreach (IdentityError error in result.Errors)
+				{
+					ModelState.AddModelError(error.Code, error.Description);
+				}
+			}
+			return View(model);
+		}
 	}
 }
