@@ -6,9 +6,6 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity?</a>
-    </li>
-    <li class="nav-item">
         <form  class="form-inline" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@ViewData["ReturnUrl"]">
             <button  type="submit" class="nav-link btn btn-link text-dark">Odhlásit</button>
         </form>
