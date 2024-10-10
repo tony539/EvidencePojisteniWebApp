@@ -12,7 +12,7 @@ namespace EvidencePojisteniWebApp.Models
 		[Required(ErrorMessage = "Vyplňte heslo.")]
 		[StringLength(100, ErrorMessage = "{0} musí mít délku alespoň {2} a nejvíc {1} znaků.", MinimumLength = 8)]
 		[DataType(DataType.Password)]
-		[Display(Name = "Password")]
+		[Display(Name = "Heslo")]
 		public string Password { get; set; } = "";
 
 		[Required(ErrorMessage = "Vyplňte heslo.")]
