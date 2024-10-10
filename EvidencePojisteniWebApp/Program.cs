@@ -6,7 +6,7 @@ namespace EvidencePojisteniWebApp
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +49,19 @@ namespace EvidencePojisteniWebApp
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            
+            using (IServiceScope scope = app.Services.CreateScope())
+            {
+                RoleManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                UserManager<IdentityUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                IdentityUser? defaultAdminUser = await userManager.FindByEmailAsync("antoninjaros03@gmail.com");
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+
+                if (defaultAdminUser is not null && !await userManager.IsInRoleAsync(defaultAdminUser, UserRoles.Admin))
+                    await userManager.AddToRoleAsync(defaultAdminUser, UserRoles.Admin);
+            }
 
             app.Run();
         }
