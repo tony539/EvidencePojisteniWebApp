@@ -22,12 +22,14 @@ namespace EvidencePojisteniWebApp.Controllers
         }
 
         // GET: Clients
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Client.ToListAsync());
         }
 
         // GET: Clients/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
