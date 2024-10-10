@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using EvidencePojisteniWebApp.Models
+using EvidencePojisteniWebApp.Models;
+
+using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 
 namespace EvidencePojisteniWebApp.Controllers
 {
@@ -85,6 +87,12 @@ namespace EvidencePojisteniWebApp.Controllers
 				}
 			}
 			return View(model);
+		}
+
+		public async Task<IActionResult> Logout()
+		{
+			await signInManager.SignOutAsync();
+			return RedirectToLocal(null);
 		}
 	}
 }
