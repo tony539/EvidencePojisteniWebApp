@@ -57,7 +57,7 @@ namespace EvidencePojisteniWebApp.Controllers
 			return View(model);
 		}
 
-		private IActionResult Register(string? returnUrl = null)
+		public IActionResult Register(string? returnUrl = null)
 		{
 			ViewData["ReturnUrl"] = returnUrl;
 			return View();
