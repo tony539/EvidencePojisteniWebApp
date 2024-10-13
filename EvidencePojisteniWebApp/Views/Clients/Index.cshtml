@@ -67,14 +67,14 @@
 						@Html.DisplayFor(modelItem => item.Email)
 					</td>
 					<td>
-						<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary">Detaily</a> |
+						<p>
+							<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary">Detaily</a>
 						@if (User.IsInRole(UserRoles.Admin))
 						{
-							<p>
-							<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Upravit</a> |
-							<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Odstranit</a>
-							</p>
+								<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Upravit</a>
+								<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Odstranit</a>
 						}
+						</p>
 					</td>
 				</tr>
 			}
